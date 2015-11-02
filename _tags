@@ -1,10 +1,10 @@
 <test> or <src>: include
-<**/*.ml> or <**/*.mli> or <**/*.mlpack> or <**/*.ml.depends>: ocaml, package(WiringPi)
-<**/*.byte>: ocaml, byte, program, package(WiringPi)
+<**/*.ml> or <**/*.mli> or <**/*.mlpack> or <**/*.ml.depends>: ocaml, package(WiringPi, unix)
+<**/*.byte>: ocaml, byte, program, package(WiringPi, unix)
 <**/*.odoc>: ocaml, doc
-<**/*.native>: ocaml, native, program, package(WiringPi)
-<**/*.cma>: ocaml, byte, library, package(WiringPi)
-<**/*.cmxa>: ocaml, native, library, package(WiringPi)
+<**/*.native>: ocaml, native, program, package(WiringPi, unix)
+<**/*.cma>: ocaml, byte, library, package(WiringPi, unix)
+<**/*.cmxa>: ocaml, native, library, package(WiringPi, unix)
 <**/*.cmo>: ocaml, byte
 <**/*.cmi>: ocaml, byte, native
 <**/*.cmx>: ocaml, native
