@@ -1,0 +1,17 @@
+opam-version: "1.2"
+name: "lib-rpi-p9813"
+version: "0.1"
+maintainer: "Roland Laurès <roland.laures@netcat.io>"
+authors: "Roland Laurès <roland.laures@netcat.io>"
+homepage: "http://netcat.io"
+bug-reports: "https://github.com/Gnuside/lib-rpi-p9813/issues"
+license: "GPLv2"
+dev-repo: "https://github.com/Gnuside/rfg-cli"
+build: [
+  [ocamlbuild -use-ocamlfind lib-rpi-p9813.native]
+]
+install: [make "install"]
+remove: ["ocamlfind" "remove" "rfg-cli"]
+depends: [
+  "ocamlfind" {build}
+]

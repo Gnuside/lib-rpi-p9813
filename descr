@@ -1,0 +1,5 @@
+Library for Raspberry pi board to manage Grove's Chainable LED
+
+This Grove's Chainable LED are implementing P9813 chip on an ad-hoc
+2-wires protocol.
+This library intends to implement the protocol and the RGB management.
