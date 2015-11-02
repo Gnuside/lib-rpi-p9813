@@ -69,34 +69,30 @@ object (self)
 	val data_pin = data_pin
 	val default_lvl = default_level
 	val read_lvl = read_level
-	val us_delay = 100 (* delay used in micro_seconds *)
+	val us_delay = 1 (* delay used in micro_seconds *)
 	(** This function sets up the port *)
 	method init =
-		print_string "Setting up line with pin ";
-		print_int clk_pin; print_string " (clk) and ";
-		print_int data_pin; print_string " (data)... ";
-		print_int (setup ()); print_string "..."; (* The setup function needs to be run in root :'( *)
+		ignore (setup ());
 		pinMode clk_pin 1;
 		digitalWrite clk_pin 0;
 		pinMode data_pin 1;
 		digitalWrite data_pin 0;
-		print_endline "Done."
 	(** Only generate one clk cycle on the clock line *)
 	method private do_clk () =
-		digitalWrite clk_pin 1;
+		digitalWrite clk_pin 0;
 		delayMicroseconds us_delay;
-		digitalWrite clk_pin 0
+		digitalWrite clk_pin 1;
+		delayMicroseconds us_delay
 	method write_byte ?(bit_lvl=8) byte =
 		let bit = if (byte land 0x80) = 0 then 0 else 1 in
-		delayMicroseconds 80;
 		digitalWrite data_pin bit;
 		self#do_clk ();
 		if bit_lvl >= 0 then self#write_byte ~bit_lvl:(bit_lvl-1) (byte lsl 1)
 		else begin
-			delayMicroseconds us_delay;
 			digitalWrite data_pin 0; (* reset to 0 *)
 		end
 	method write_bytes bytes =
+		(*(print_string "Sending: 0x";Array.iter (function b -> Printf.printf "%02X" b) bytes; print_newline ());*)
 		Array.iter self#write_byte bytes
 end;;
 		
